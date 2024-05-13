@@ -3,7 +3,6 @@
 set -e
 
 cd "$(dirname "$0")/.."
-mkdir -p config
 
 hass --script ensure_config -c config
 
