@@ -14,3 +14,38 @@ scripts/install/pip_packages homeassistant
 # scripts/install/frontend
 
 # pre-commit  install --config .github/pre-commit-config.yaml
+
+
+#!/usr/bin/env bash
+# Setups the repository.
+
+# Stop on errors
+set -e
+
+cd "$(dirname "$0")/.."
+mkdir -p config
+
+# if [ ! -n "$DEVCONTAINER" ] && [ ! -n "$VIRTUAL_ENV" ];then
+#   python3 -m venv venv
+#   source venv/bin/activate
+# fi
+
+# script/bootstrap
+
+# pre-commit install
+# python3 -m pip install -e . --config-settings editable_mode=compat --constraint homeassistant/package_constraints.txt
+# python3 -m script.translations develop --all
+
+hass --script ensure_config -c config
+
+cd config
+ln -sf ../custom_components custom_components
+
+# if ! grep -R "logger" config/configuration.yaml >> /dev/null;then
+# echo "
+# logger:
+#   default: info
+#   logs:
+#     homeassistant.components.cloud: debug
+# " >> config/configuration.yaml
+# fi
