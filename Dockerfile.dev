@@ -35,7 +35,7 @@ RUN \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src
+# WORKDIR /usr/src
 
 # Setup hass-release
 # RUN git clone --depth 1 https://github.com/home-assistant/hass-release \
@@ -44,18 +44,25 @@ WORKDIR /usr/src
 # RUN git clone --depth 1 https://github.com/home-assistant/core \
 #     && pip3 install -e core/
 
-# RUN pip3 install homeassistant
-# RUN pip3 install home-assistant-frontend
+# RUN pip3 install numpy
+# RUN pip3 install mutagen
+# RUN pip3 install serial
+# RUN pip3 install aiodhcpwatcher
+
 
 WORKDIR /workspaces
 
 # Install Python dependencies from requirements
-# COPY requirements.txt ./
-# COPY homeassistant/package_constraints.txt homeassistant/package_constraints.txt
-# RUN pip3 install -r requirements.txt
+COPY requirements_all.txt requirements.txt ./
+COPY homeassistant/package_constraints.txt homeassistant/package_constraints.txt
+RUN pip3 install -r requirements.txt
 # COPY requirements_test.txt requirements_test_pre_commit.txt ./
 # RUN pip3 install -r requirements_test.txt
 # RUN rm -rf requirements.txt requirements_test.txt requirements_test_pre_commit.txt homeassistant/
+RUN rm -rf requirements.txt homeassistant/
+
+RUN pip3 install homeassistant
+RUN pip3 install home-assistant-frontend
 
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash
