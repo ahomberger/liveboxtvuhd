@@ -37,26 +37,10 @@ RUN \
 
 WORKDIR /usr/src
 
-# Setup hass-release
-# RUN git clone --depth 1 https://github.com/home-assistant/hass-release \
-#     && pip3 install -e hass-release/
-
 RUN git clone --depth 1 https://github.com/home-assistant/core
 
 WORKDIR /usr/src/core
 RUN pip3 install wheel -r requirements_all.txt
-
-# WORKDIR /workspaces
-
-# Install Python dependencies from requirements
-# COPY requirements_all.txt requirements.txt ./
-# COPY homeassistant/package_constraints.txt homeassistant/package_constraints.txt
-# RUN pip3 install wheel -r requirements_all.txt
-# COPY requirements_test.txt requirements_test_pre_commit.txt ./
-# RUN pip3 install -r requirements_test.txt
-# RUN rm -rf requirements.txt requirements_test.txt requirements_test_pre_commit.txt homeassistant/
-
-# RUN rm -rf requirements_all.txt requirements.txt homeassistant/
 
 RUN pip3 install homeassistant
 RUN pip3 install home-assistant-frontend

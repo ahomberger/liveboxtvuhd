@@ -11,31 +11,6 @@
           "panel": "new"
         },
         "problemMatcher": [],
-        // "dependsOn": ["Compile English translations"]
-      },
-      {
-        "label": "Install all Requirements",
-        "type": "shell",
-        "command": "pip3 install -r requirements_all.txt",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "presentation": {
-          "reveal": "always",
-          "panel": "new"
-        },
-        "problemMatcher": []
-      },
-      {
-        "label": "Compile English translations",
-        "detail": "In order to test changes to translation files, the translation strings must be compiled into Home Assistant's translation directories.",
-        "type": "shell",
-        "command": "python3 -m script.translations develop --all",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
       },
     ],
     "inputs": [
