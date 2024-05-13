@@ -2,8 +2,15 @@
 	"name": "Home Assistant liveboxtvuhd",
 	"dockerFile": "../Dockerfile",
 	"postCreateCommand": "scripts/setup",
-	// Port 5683 udp is used by Shelly integration
-	"appPort": ["8123:8123", "5683:5683/udp"],
+	"forwardPorts": [
+        8123
+    ],
+    "portsAttributes": {
+        "8123": {
+            "label": "Home Assistant",
+            "onAutoForward": "notify"
+        }
+    },
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -25,10 +32,10 @@
 				// "python.testing.pytestArgs": [
 				// 	"--no-cov"
 				// ],
-				// "editor.formatOnPaste": false,
-				// "editor.formatOnSave": true,
-				// "editor.formatOnType": true,
-				// "files.trimTrailingWhitespace": true,
+				"editor.formatOnPaste": false,
+				"editor.formatOnSave": true,
+				"editor.formatOnType": true,
+				"files.trimTrailingWhitespace": true,
 				// "terminal.integrated.profiles.linux": {
 				// 	"zsh": {
 				// 		"path": "/usr/bin/zsh"
@@ -43,9 +50,9 @@
 				// 	"!include_dir_merge_list scalar",
 				// 	"!include_dir_merge_named scalar"
 				// ],
-				// "[python]": {
-				// 	"editor.defaultFormatter": "charliermarsh.ruff"
-				// }
+				"[python]": {
+					"editor.defaultFormatter": "charliermarsh.ruff"
+				}
 			}
 		}
 	}
